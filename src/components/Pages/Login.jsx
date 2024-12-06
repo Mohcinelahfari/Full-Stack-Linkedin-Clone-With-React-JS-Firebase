@@ -1,4 +1,6 @@
 import React from "react";
+import { signInApi } from "../../redux/actions";
+import { connect } from "react-redux";
 
 function Login(props) {
   return (
@@ -61,7 +63,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn : () => dispatch(signInApi)
+    signIn : () => dispatch(signInApi())
   }
 } 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
