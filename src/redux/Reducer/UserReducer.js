@@ -1,17 +1,15 @@
 import * as actions from "../actions/actionType"
-const initialState =  {
+const initialState = {
     user : null
 }
-
-
 const userReducer = (state = initialState, action) => {
-    switch (action.type){
-        case actions.SET_USER : 
+    switch (action.type) {
+        case actions.SET_USER :
             return {
                 ...state,
                 user : action.user
             }
-        default : 
+        default :
             return state;
     }
 }
