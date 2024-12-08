@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
+const Header = ({user, signOut}) => {
 
-const Header = (props) => {
+
   return (
+
     <Container>
+      {/* {
+        user && <pre>{JSON.stringify(user, null, 2)}</pre>
+      } */}
+
       <Content>
         <Logo>
           <a href="/home">
@@ -56,15 +63,23 @@ const Header = (props) => {
             </NavList>
             <User>
               <a>
-              <img src="/images/user.svg" alt="" />
+                {user && user.photoURL
+                  ? (
+                    <img src={user.photoURL
+                    } />
+                  ) : (
+                    <img src="/images/user.svg" />
+                  )}
                 <span>
                   Me
                   <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
-              <SignOut onClick={() => props.signOut()}>
-                <a>Sign Out</a>
-              </SignOut>
+              {user && (
+                <SignOut onClick={signOut}> {/* Ensure signOut is called directly */}
+                  <a>Sign Out</a>
+                </SignOut>
+              )}
             </User>
             <Work>
               <a>
