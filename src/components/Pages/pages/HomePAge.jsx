@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../../Chaire/Header'
 
 function HomePAge() {
   return (
-    <div>HomePAge</div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
