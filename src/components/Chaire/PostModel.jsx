@@ -8,6 +8,30 @@ function PostModel({ showModel, handelClick, user }) {
     const [ShareImage, setShareImage] = useState("")
     const [VideoLink, setVideoLink] = useState("")
 
+
+    const handelChange = (e) => {
+        const image = e.target.file[0]
+        if(image === "" || image === undefined){
+            alert(`this is not image , ${typeof image}` )
+            return
+        }
+        else{
+            ShareImage(image)
+        }
+    }
+
+    const switchArrea = (area) => {
+        setShareImage("")
+        setVideoLink("")
+        setassetArea(area)
+    }
+    const reset =(e) => {
+        seteditorText("")
+        setassetArea("")
+        setShareImage("")
+        setVideoLink("")
+        handelClick(e)
+    }
     return (
         <>
             {showModel && (
@@ -15,7 +39,7 @@ function PostModel({ showModel, handelClick, user }) {
                     <Content>
                         <Header>
                             <h2>Create a post</h2>
-                            <button>
+                            <button onClick={(e) => reset(e)}>
                                 <img src="/images/close-icon.svg" alt="" />
                             </button>
                         </Header>
@@ -35,6 +59,7 @@ function PostModel({ showModel, handelClick, user }) {
                                     value={editorText}
                                     placeholder='what do want to send in your post'
                                     onChange={(e) => seteditorText(e.target.value)}
+                                    onFocus={true}
                                 />
 
                             </Editor>
@@ -52,7 +77,7 @@ function PostModel({ showModel, handelClick, user }) {
                                                 htmlFor="file">Select Image</label>
                                         </p>
                                         {
-                                            ShareImage && <img src="" alt="Image Share" />
+                                            ShareImage && <img src={URL.createObjectURL(ShareImage)} alt="Image Share" />
                                         }
                                     </UploadImage>
                                 ) : (
@@ -70,10 +95,10 @@ function PostModel({ showModel, handelClick, user }) {
                         </ShareContent>
                         <ShareCreation>
                             <AttachAssets>
-                                <AssetButton >
+                                <AssetButton onClick={() => switchArrea("image")}>
                                     <img src="/images/share-image.svg" alt="" />
                                 </AssetButton>
-                                <AssetButton>
+                                <AssetButton onClick={() => switchArrea("video")}>
                                     <img src="/images/share-video.svg" alt="" />
                                 </AssetButton>
                             </AttachAssets>
