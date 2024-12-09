@@ -7,3 +7,17 @@ export const setUser = (payload) => {
     }
 }
 
+
+export const setLoading = (status) => {
+    return {
+        type : actions.SET_LOADING,
+        status : status
+    }
+}
+
+export const getArticle = (payload) => {
+    return {
+        type: actions.GET_ARTICLE,
+        payload : payload
+    }
+}

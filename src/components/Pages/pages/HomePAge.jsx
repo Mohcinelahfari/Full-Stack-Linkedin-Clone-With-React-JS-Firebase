@@ -7,7 +7,7 @@ import Main from '../../Chaire/Main'
 import Rightside from '../../Chaire/Rightside'
 import styled from "styled-components";
 function HomePAge(props) {
-  const {user,signOut } = props
+  const {user,signOut, loading } = props
   return (
     <div>
       <Header user={user} signOut={signOut}/>
@@ -23,7 +23,7 @@ function HomePAge(props) {
       </Section>
       <Layout>
         <Leftside user={user}  />
-        <Main />
+        <Main user={user} loading={loading} />
         <Rightside />
       </Layout>
     </Container>
@@ -76,6 +76,7 @@ const Layout = styled.div`
 const mapStateToProps = (state) => {
   return {
     user: state.userState.user,
+    loading : state.articleStata.loading
   };
 };
 const mapDispatchToProps = (dispatch) => {
