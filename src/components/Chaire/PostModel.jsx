@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore';
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player';
 
@@ -8,6 +9,23 @@ function PostModel({ showModel, handelClick, user }) {
     const [ShareImage, setShareImage] = useState("")
     const [VideoLink, setVideoLink] = useState("")
 
+
+    const handelPost = (e) => {
+        e.preventDefault()
+        if(e.target !== e.currentTarget){
+            return;
+        }
+
+        const payload = {
+            image : ShareImage,
+            video : VideoLink,
+            user : user,
+            description : editorText,
+            timeStamp : Timestamp.now(),
+
+        }
+        reset(e)
+    }
 
     const handelChange = (e) => {
         const image = e.target.file[0]
@@ -108,7 +126,7 @@ function PostModel({ showModel, handelClick, user }) {
                                     Anyone
                                 </AssetButton>
                             </ShareComment>
-                            <PostButton disabled={!editorText ? true : false}>
+                            <PostButton disabled={!editorText ? true : false} onClick={(e) => handelPost(e)}>
                                 Post
                             </PostButton>
                         </ShareCreation>
